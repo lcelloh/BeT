@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Camera _isometricCamera;
+    [SerializeField] Camera _frontalCamera;
+
+    void Awake()
     {
-        
+        _isometricCamera = Camera.main;
+       _isometricCamera.enabled = true;
+        _frontalCamera.enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SwitchCameras();
+        }
+    }
+
+    void SwitchCameras() 
+    {
+        if (_isometricCamera.enabled)
+        {
+            _isometricCamera.enabled = false;
+            _frontalCamera.enabled = true;
+        }
+        else if (!_isometricCamera.enabled)
+        {
+            _frontalCamera.enabled = false;
+            _isometricCamera.enabled = true;
+        }
     }
 }
