@@ -9,6 +9,10 @@ using UnityEngine;
 
 public class GridXZ<TGridObject>
 {
+
+
+    public static GridXZ<TGridObject> Instance { get; private set; }
+
     private int _width;
     private int _height;
     private float _cellSize;
@@ -97,6 +101,5 @@ public class GridXZ<TGridObject>
         int x, z;
         GetXZ(worldPosition, out x, out z);
         SetObject(x, z, value);
-    }
-
+    }    
 }

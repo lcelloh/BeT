@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
-    Camera _isometricCamera;
-    [SerializeField] Camera _frontalCamera;
+    Camera _frontalCamera;
+    [SerializeField] Camera _topDownCamera;
 
     void Awake()
     {
-        _isometricCamera = Camera.main;
-       _isometricCamera.enabled = true;
-        _frontalCamera.enabled = false;
+        _frontalCamera = Camera.main;
+       _frontalCamera.enabled = true;
+        _topDownCamera.enabled = false;
+        Mouse3D._camera = _frontalCamera;
     }
 
     void Update()
@@ -24,15 +25,17 @@ public class CameraHandler : MonoBehaviour
 
     void SwitchCameras() 
     {
-        if (_isometricCamera.enabled)
-        {
-            _isometricCamera.enabled = false;
-            _frontalCamera.enabled = true;
-        }
-        else if (!_isometricCamera.enabled)
-        {
+        if (_frontalCamera.enabled)
+        { 
             _frontalCamera.enabled = false;
-            _isometricCamera.enabled = true;
+            _topDownCamera.enabled = true;
+            Mouse3D._camera = _topDownCamera;
+        }
+        else if (!_frontalCamera.enabled)
+        {
+            _topDownCamera.enabled = false;
+            _frontalCamera.enabled = true;
+            Mouse3D._camera = _frontalCamera;
         }
     }
 }
